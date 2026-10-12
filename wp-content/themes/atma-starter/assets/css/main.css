@@ -1099,6 +1099,130 @@ img {
   text-align: center;
 }
 
+/* ONLINE BREATHWORK SESSION PAGE */
+
+.atma-session-page {
+  background: var(--color-cream);
+}
+
+.atma-session-hero {
+  padding: clamp(44px, 6vw, 76px) 0 clamp(48px, 6vw, 80px);
+  background: var(--color-cream);
+}
+
+.atma-session-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+  gap: clamp(36px, 6vw, 88px);
+  align-items: center;
+}
+
+.atma-session-hero-copy {
+  min-width: 0;
+}
+
+.atma-session-kicker {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--color-accent-dark);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.atma-session-hero h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(42px, 4.2vw, 56px);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.atma-session-lead {
+  max-width: 62ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+.atma-session-lead > p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+}
+
+.atma-session-hero-image,
+.atma-session-image,
+.atma-session-image-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+}
+
+.atma-session-hero-image {
+  overflow: hidden;
+  background: var(--color-warm);
+}
+
+.atma-session-image {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.atma-session-image-placeholder {
+  background: var(--color-warm);
+}
+
+.atma-session-content {
+  padding: clamp(48px, 6vw, 80px) 0;
+  background: var(--color-surface);
+}
+
+.atma-session-copy {
+  width: min(calc(100% - 48px), 900px);
+}
+
+.atma-session-copy > p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.atma-session-copy > p + p {
+  margin-top: 28px;
+}
+
+.atma-session-copy > .atma-session-emphasis {
+  width: fit-content;
+  max-width: 100%;
+  margin: 34px 0;
+  padding: 14px 24px;
+  border-left: 2px solid var(--color-accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(27px, 3vw, 34px);
+  line-height: 1.35;
+}
+
+.atma-session-copy > .atma-session-wisdom {
+  padding-left: 22px;
+  border-left: 2px solid var(--color-cream);
+  color: var(--color-text);
+}
+
+.atma-session-cta {
+  padding: 0 24px var(--section-space-mobile);
+  background: var(--color-surface);
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   .atma-story-hero {
     padding: 36px 0 24px;
@@ -1134,6 +1258,33 @@ img {
   .atma-story-cta {
     padding-bottom: var(--section-space-mobile);
   }
+
+  .atma-session-hero {
+    padding: 36px 0 48px;
+  }
+
+  .atma-session-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .atma-session-hero h1 {
+    font-size: clamp(40px, 7vw, 48px);
+  }
+
+  .atma-session-hero-image {
+    width: min(100%, 560px);
+    justify-self: center;
+  }
+
+  .atma-session-lead,
+  .atma-session-copy > p {
+    font-size: 17px;
+  }
+
+  .atma-session-content {
+    padding: 48px 0;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1151,6 +1302,54 @@ img {
 
   .atma-story-hero-image {
     width: min(100%, 320px);
+  }
+
+  .atma-session-hero {
+    padding: 30px 0 40px;
+  }
+
+  .atma-session-hero-grid {
+    gap: 24px;
+  }
+
+  .atma-session-kicker {
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+
+  .atma-session-hero h1 {
+    font-size: 40px;
+  }
+
+  .atma-session-lead,
+  .atma-session-copy > p {
+    font-size: 16px;
+  }
+
+  .atma-session-lead {
+    margin-top: 18px;
+  }
+
+  .atma-session-content {
+    padding: 40px 0;
+  }
+
+  .atma-session-copy {
+    width: min(calc(100% - 32px), 900px);
+  }
+
+  .atma-session-copy > p + p {
+    margin-top: 22px;
+  }
+
+  .atma-session-copy > .atma-session-emphasis {
+    margin: 28px 0;
+    padding: 12px 18px;
+    font-size: 29px;
+  }
+
+  .atma-session-copy > .atma-session-wisdom {
+    padding-left: 16px;
   }
 
   .atma-story-content {
