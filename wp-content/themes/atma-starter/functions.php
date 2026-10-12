@@ -28,6 +28,16 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 
+    if (is_page('faq')) {
+        wp_enqueue_script(
+            'atma-faq',
+            get_stylesheet_directory_uri() . '/assets/js/faq.js',
+            [],
+            filemtime(get_stylesheet_directory() . '/assets/js/faq.js'),
+            true
+        );
+    }
+
 });
 
 /* ==========================================
