@@ -38,7 +38,7 @@ get_header();
                     <section class="atma-faq-item">
                         <h2 class="atma-faq-item-heading">
                             <button class="atma-faq-question" id="atma-faq-question-2" type="button" aria-expanded="false" aria-controls="atma-faq-answer-2">
-                                <span>Czy w trakcie sesji jestem przytomna(y)?</span>
+                                <span>Czy w trakcie sesji jestem świadoma(y)?</span>
                                 <span class="atma-faq-icon" aria-hidden="true"></span>
                             </button>
                         </h2>
@@ -66,6 +66,30 @@ get_header();
                                     <li>Może pojawić się zwiększone parcie na pęcherz. Co wtedy robimy? Po prostu idziesz do łazienki, a po powrocie możemy kontynuować sesję.</li>
                                 </ul>
                                 <p>Każde ciało reaguje indywidualnie, dlatego warto obserwować swoje odczucia i informować mnie o tym, czego w danym momencie potrzebujesz.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="atma-faq-item">
+                        <h2 class="atma-faq-item-heading">
+                            <button class="atma-faq-question" id="atma-faq-question-4" type="button" aria-expanded="false" aria-controls="atma-faq-answer-4">
+                                <span>Jak możesz czuć się po sesji oddechowej?</span>
+                                <span class="atma-faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h2>
+                        <div class="atma-faq-answer" id="atma-faq-answer-4" role="region" aria-labelledby="atma-faq-question-4" aria-hidden="true">
+                            <div class="atma-faq-answer-inner">
+                                <ul>
+                                    <li>Odprężona(y), zrelaksowana(y), często spokojna(y).</li>
+                                    <li>Czujesz więcej energii w ciele i większą świadomość swojego ciała.</li>
+                                    <li>Energia, która wcześniej była wykorzystywana na tłumienie trudnych emocji, staje się dostępna dla Ciebie.</li>
+                                    <li>Wzrasta poziom akceptacji życia takim, jakie jest.</li>
+                                    <li>Doświadczasz wyciszenia i większego spokoju.</li>
+                                    <li>Wzrasta poziom kreatywności i lekkości.</li>
+                                    <li>Możesz zacząć postrzegać świat i siebie inaczej – prościej, pełniej, spokojniej.</li>
+                                    <li>W ciągu kolejnych dni po sesji mogą pojawiać się zmiany związane z tematem, z którym pracowałaś(eś). Możesz zauważyć zewnętrzne zmiany związane z tym obszarem.</li>
+                                    <li>Pojawia się w Tobie przestrzeń na wybieranie innych zachowań i reakcji niż te, które pojawiały się dotychczas.</li>
+                                </ul>
                             </div>
                         </div>
                     </section>
