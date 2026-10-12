@@ -17,7 +17,15 @@ add_action('wp_enqueue_scripts', function () {
         'atma-main',
         get_stylesheet_directory_uri() . '/assets/css/main.css',
         ['atma-starter-style'],
-        wp_get_theme()->get('Version')
+        filemtime(get_stylesheet_directory() . '/assets/css/main.css')
+    );
+
+    wp_enqueue_script(
+        'atma-navigation',
+        get_stylesheet_directory_uri() . '/assets/js/navigation.js',
+        [],
+        filemtime(get_stylesheet_directory() . '/assets/js/navigation.js'),
+        true
     );
 
 });
@@ -33,6 +41,43 @@ add_action('after_setup_theme', function () {
     ]);
 
 });
+
+class ATMA_Nav_Walker extends Walker_Nav_Menu {
+
+    private $submenu_ids = [];
+
+    public function start_el(&$output, $data_object, $depth = 0, $args = null, $current_object_id = 0) {
+        $item_output = '';
+
+        parent::start_el($item_output, $data_object, $depth, $args, $current_object_id);
+        $output .= $item_output;
+
+        if (isset($data_object->classes) && in_array('menu-item-has-children', $data_object->classes, true)) {
+            $submenu_id = 'atma-submenu-' . absint($data_object->ID);
+            $this->submenu_ids[$depth] = $submenu_id;
+            $label = sprintf('Rozwiń podmenu: %s', wp_strip_all_tags($data_object->title));
+
+            $output .= sprintf(
+                '<button class="atma-submenu-toggle" type="button" aria-expanded="false" aria-controls="%1$s" aria-label="%2$s"><span aria-hidden="true"></span></button>',
+                esc_attr($submenu_id),
+                esc_attr($label)
+            );
+        }
+    }
+
+    public function start_lvl(&$output, $depth = 0, $args = null) {
+        $indent = str_repeat("\t", $depth);
+        $submenu_id = isset($this->submenu_ids[$depth]) ? $this->submenu_ids[$depth] : '';
+        $classes = apply_filters('nav_menu_submenu_css_class', ['sub-menu'], $args, $depth);
+        $atts = [
+            'class' => implode(' ', $classes),
+            'id'    => $submenu_id,
+        ];
+        $atts = apply_filters('nav_menu_submenu_attributes', $atts, $args, $depth);
+
+        $output .= sprintf("\n%s<ul%s>\n", $indent, $this->build_atts($atts));
+    }
+}
 
 /* ==========================================
    CUSTOMIZER
@@ -235,7 +280,7 @@ function atma_customize_register($wp_customize) {
         ],
         'atma_about_button_url' => [
             'label'   => 'Link przycisku',
-            'default' => '#historia',
+            'default' => home_url('/o-mnie/'),
             'type'    => 'url',
         ],
     ];

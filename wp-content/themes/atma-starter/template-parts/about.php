@@ -2,6 +2,16 @@
 
     <div class="atma-container">
 
+        <?php
+        $about_page = get_page_by_path('o-mnie');
+        $about_page_url = $about_page ? get_permalink($about_page) : home_url('/o-mnie/');
+        $about_button_url = get_theme_mod('atma_about_button_url');
+
+        if (!$about_button_url || $about_button_url === '#historia') {
+            $about_button_url = $about_page_url;
+        }
+        ?>
+
         <div class="about-grid">
 
             <div class="about-image">
@@ -43,7 +53,7 @@
                     <?php echo wp_kses_post(get_theme_mod('atma_about_paragraph2', 'Łączę świadomą pracę z oddechem, uważność oraz indywidualne podejście do każdej osoby. Każde spotkanie jest inne, ponieważ każda historia jest wyjątkowa.')); ?>
                 </p>
 
-                <a href="<?php echo esc_url(get_theme_mod('atma_about_button_url', '#historia')); ?>" class="atma-btn">
+                <a href="<?php echo esc_url($about_button_url); ?>" class="atma-btn">
                     <?php echo esc_html(get_theme_mod('atma_about_button_text', 'Poznaj moją historię')); ?>
                 </a>
 
