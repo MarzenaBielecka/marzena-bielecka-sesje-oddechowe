@@ -1918,3 +1918,273 @@ img {
     transition-duration: 0.01ms;
   }
 }
+
+/* PRICING PAGE */
+
+.atma-pricing-page {
+  background: var(--color-surface);
+}
+
+.atma-pricing-hero {
+  padding: clamp(52px, 7vw, 92px) 0;
+  background: var(--color-cream);
+}
+
+.atma-pricing-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 104px);
+  align-items: center;
+}
+
+.atma-pricing-hero-image {
+  overflow: hidden;
+  margin: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-warm);
+}
+
+.atma-pricing-image,
+.atma-pricing-image-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.atma-pricing-image {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: 30% center;
+}
+
+.atma-pricing-image-placeholder {
+  background: var(--color-warm);
+}
+
+.atma-pricing-image-credit {
+  padding: 9px 12px;
+  background: #fff;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.atma-pricing-image-credit a {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.atma-pricing-hero-copy {
+  min-width: 0;
+}
+
+.atma-pricing-kicker {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--color-accent-dark);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.atma-pricing-hero h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(48px, 3.8vw, 54px);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.atma-pricing-hero-copy > p {
+  max-width: 58ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 19px;
+  line-height: 1.8;
+}
+
+.atma-pricing-hero-copy > p + p {
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.atma-pricing-offer {
+  padding: clamp(56px, 7vw, 104px) 0;
+  background: var(--color-surface);
+}
+
+.atma-pricing-offer-intro {
+  max-width: 680px;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+  text-align: center;
+}
+
+.atma-pricing-offer-intro h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 42px);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.atma-pricing-offer-intro p {
+  margin: 18px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.atma-pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px);
+}
+
+.atma-pricing-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: clamp(28px, 3vw, 40px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-cream);
+}
+
+.atma-pricing-card h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 2.4vw, 30px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.atma-pricing-price {
+  margin: 18px 0 0;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--color-warm);
+  color: var(--color-accent-dark);
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 2.6vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.atma-pricing-card-text {
+  margin: 22px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.atma-pricing-closing {
+  padding: 0 0 clamp(64px, 8vw, 112px);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.atma-pricing-closing .atma-container {
+  padding-top: clamp(40px, 5vw, 64px);
+  border-top: 1px solid var(--color-border);
+}
+
+.atma-pricing-closing-lead {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 17px;
+  letter-spacing: 0.04em;
+}
+
+.atma-pricing-signature {
+  margin: 10px 0 32px;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(34px, 4vw, 46px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+@media (max-width: 999px) {
+  .atma-pricing-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .atma-pricing-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .atma-pricing-hero {
+    padding: 44px 0 52px;
+  }
+
+  .atma-pricing-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .atma-pricing-hero-image {
+    width: min(100%, 600px);
+    justify-self: center;
+  }
+
+  .atma-pricing-image,
+  .atma-pricing-image-placeholder {
+    aspect-ratio: 4 / 3;
+  }
+
+  .atma-pricing-hero h1 {
+    font-size: 44px;
+  }
+
+  .atma-pricing-hero-copy > p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .atma-pricing-hero {
+    padding: 36px 0 42px;
+  }
+
+  .atma-pricing-hero-grid {
+    gap: 24px;
+  }
+
+  .atma-pricing-kicker {
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+
+  .atma-pricing-hero h1 {
+    font-size: 40px;
+  }
+
+  .atma-pricing-hero-copy > p {
+    margin-top: 18px;
+    font-size: 17px;
+  }
+
+  .atma-pricing-hero-copy > p + p {
+    font-size: 16px;
+  }
+
+  .atma-pricing-offer-intro p {
+    font-size: 16px;
+  }
+
+  .atma-pricing-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .atma-pricing-card:last-child {
+    grid-column: auto;
+  }
+}
