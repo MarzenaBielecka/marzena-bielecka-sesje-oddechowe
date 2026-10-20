@@ -12,7 +12,7 @@ $stories_query = new WP_Query([
 
 get_template_part('template-parts/histories-archive', null, [
     'query' => $stories_query,
-    'title' => 'Historie sesji',
+    'title' => 'Historie z sesji oddechowych',
 ]);
 
 get_footer();

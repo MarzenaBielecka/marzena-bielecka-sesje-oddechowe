@@ -48,6 +48,51 @@ get_header();
                         ]);
                         ?>
                     </div>
+
+                    <?php
+                    $comment_form_defaults_filter = function ($defaults) {
+                        $defaults['comment_field'] = str_replace(
+                            '<label for="comment">' . _x('Comment', 'noun'),
+                            '<label for="comment">Treść komentarza',
+                            $defaults['comment_field']
+                        );
+                        $defaults['title_reply'] = 'Dodaj komentarz';
+                        $defaults['title_reply_to'] = 'Odpowiedz na %s';
+                        $defaults['cancel_reply_link'] = 'Anuluj odpowiedź';
+                        $defaults['label_submit'] = 'Dodaj komentarz';
+                        $defaults['class_container'] = 'comment-respond atma-story-comments';
+                        $defaults['class_form'] = 'comment-form atma-story-comments-form';
+
+                        return $defaults;
+                    };
+                    $comment_form_fields_filter = function ($fields) {
+                        if (isset($fields['author'])) {
+                            $fields['author'] = str_replace(
+                                '<label for="author">' . __('Name'),
+                                '<label for="author">Imię',
+                                $fields['author']
+                            );
+                        }
+
+                        if (isset($fields['email'])) {
+                            $fields['email'] = str_replace(
+                                '<label for="email">' . __('Email'),
+                                '<label for="email">Adres e-mail',
+                                $fields['email']
+                            );
+                        }
+
+                        unset($fields['url']);
+
+                        return $fields;
+                    };
+
+                    add_filter('comment_form_defaults', $comment_form_defaults_filter);
+                    add_filter('comment_form_fields', $comment_form_fields_filter);
+                    comments_template();
+                    remove_filter('comment_form_defaults', $comment_form_defaults_filter);
+                    remove_filter('comment_form_fields', $comment_form_fields_filter);
+                    ?>
                 </article>
 
                 <?php get_template_part('template-parts/historie-sidebar'); ?>

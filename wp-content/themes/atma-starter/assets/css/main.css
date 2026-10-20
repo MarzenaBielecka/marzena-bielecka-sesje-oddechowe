@@ -2892,6 +2892,191 @@ figure.atma-story-hero img {
   border-left: 3px solid var(--color-accent);
 }
 
+.atma-story-single .comment-respond .comment-reply-title {
+  margin: 0 0 6px;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.atma-story-single #comments {
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.atma-story-single #comments .title-comments {
+  display: none;
+}
+
+.atma-story-single .commentlist {
+  display: grid;
+  gap: 18px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.atma-story-single .commentlist > li,
+.atma-story-single .commentlist .children > li {
+  padding: clamp(18px, 3vw, 28px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  list-style: none;
+}
+
+.atma-story-single .commentlist .children {
+  display: grid;
+  gap: 16px;
+  margin: 18px 0 0;
+  padding-left: clamp(12px, 3vw, 28px);
+}
+
+.atma-story-single .commentlist .comment-body > * + * {
+  margin-top: 12px;
+}
+
+.atma-story-single #comments .comment-list .comment-body .comment-author.vcard,
+.atma-story-single #comments .comment-list .comment-body .comment-meta .comment-metadata {
+  color: var(--color-muted);
+  font-size: 16px;
+}
+
+.atma-story-single #comments .comment-list .comment-body .comment-content,
+.atma-story-single #comments .comment-list .comment-body .comment-content p {
+  color: var(--color-muted);
+  font-size: 18px;
+}
+
+.atma-story-single #comments .comment-list .comment-body .comment-meta .comment-metadata a,
+.atma-story-single #comments .comment-list .comment-body .comment-meta .comment-metadata time {
+  font-size: 16px;
+}
+
+.atma-story-single .commentlist .comment-author .avatar {
+  margin-right: 8px;
+  border-radius: var(--radius-full);
+  vertical-align: middle;
+}
+
+.atma-story-single .commentlist a,
+.atma-story-single .comment-reply-link {
+  color: var(--color-accent-dark);
+  text-underline-offset: 3px;
+}
+
+.atma-story-single #comments .comment-list .comment-body .reply > .comment-reply-link {
+  font-size: 16px;
+}
+
+.atma-story-single .commentlist p {
+  margin-bottom: 0;
+  overflow-wrap: anywhere;
+}
+
+.atma-story-single .comment-respond {
+  min-width: 0;
+  margin-top: clamp(24px, 4vw, 40px);
+  padding: clamp(18px, 3vw, 28px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-sizing: border-box;
+}
+
+.atma-story-single .comment-respond .comment-notes {
+  margin: 0 0 14px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.atma-story-single .comment-form > p {
+  margin: 12px 0 0;
+}
+
+.atma-story-single .comment-respond label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.atma-story-single .comment-respond .required {
+  color: var(--color-accent-dark);
+}
+
+.atma-story-single .comment-respond input:not([type="checkbox"]),
+.atma-story-single .comment-respond textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 9px 12px;
+  color: var(--color-text);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.atma-story-single .comment-respond textarea {
+  height: 120px;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.atma-story-single .comment-respond input:focus,
+.atma-story-single .comment-respond textarea:focus {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-cream);
+}
+
+.atma-story-single .comment-form-cookies-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.atma-story-single .comment-form-cookies-consent input {
+  flex: 0 0 auto;
+  margin: 4px 0 0;
+}
+
+.atma-story-single .comment-form-cookies-consent label {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.atma-story-single .comment-respond .form-submit input {
+  width: auto;
+  min-height: 42px;
+  padding: 8px 18px;
+  color: #fff;
+  background: var(--color-accent-dark);
+  border: 1px solid var(--color-accent-dark);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.atma-story-single .comment-respond .form-submit input:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
 @media (max-width: 900px) {
   .atma-stories-layout {
     grid-template-columns: minmax(0, 1fr);
