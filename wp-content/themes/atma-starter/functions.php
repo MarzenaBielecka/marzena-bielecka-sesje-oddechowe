@@ -383,6 +383,30 @@ function atma_customize_register($wp_customize) {
         ]);
     }
 
+    /* ===== STOPKA ===== */
+
+    $wp_customize->add_section('atma_footer', [
+        'title'    => 'Atma Starter – Stopka',
+        'priority' => 34,
+    ]);
+
+    $wp_customize->add_setting('atma_footer_image', [
+        'default'           => 73,
+        'sanitize_callback' => 'absint',
+    ]);
+
+    $wp_customize->add_control(
+        new WP_Customize_Media_Control(
+            $wp_customize,
+            'atma_footer_image',
+            [
+                'label'     => 'Zdjęcie w stopce',
+                'section'   => 'atma_footer',
+                'mime_type' => 'image',
+            ]
+        )
+    );
+
     /* ===== OPINIE ===== */
 
     $wp_customize->add_section('atma_testimonials', [
