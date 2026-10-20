@@ -56,6 +56,8 @@ add_action('wp_enqueue_scripts', function () {
 
 add_action('after_setup_theme', function () {
 
+    add_theme_support('post-thumbnails');
+
     register_nav_menus([
         'primary' => 'Menu główne',
     ]);
@@ -458,6 +460,47 @@ function atma_customize_register($wp_customize) {
 }
 
 add_action('customize_register', 'atma_customize_register');
+
+function atma_customize_stories_register($wp_customize) {
+    $wp_customize->add_section('atma_stories', [
+        'title'    => 'Historie sesji',
+        'priority' => 31,
+    ]);
+
+    $wp_customize->add_setting('atma_stories_sidebar_image', [
+        'default'           => 0,
+        'sanitize_callback' => 'absint',
+    ]);
+
+    $wp_customize->add_control(new WP_Customize_Media_Control(
+        $wp_customize,
+        'atma_stories_sidebar_image',
+        [
+            'label'       => 'Zdjęcie na dole panelu bocznego',
+            'description' => 'Wybierz zdjęcie z biblioteki mediów. Nie wybrano domyślnego zdjęcia.',
+            'section'     => 'atma_stories',
+            'mime_type'   => 'image',
+        ]
+    ));
+}
+
+add_action('customize_register', 'atma_customize_stories_register');
+
+function atma_filter_stories_archive($query) {
+    if (is_admin() || !$query->is_main_query() || !$query->is_home()) {
+        return;
+    }
+
+    $stories_category = get_category_by_slug('historie-sesji');
+
+    if ($stories_category) {
+        $query->set('cat', (int) $stories_category->term_id);
+    }
+
+    $query->set('posts_per_page', 6);
+}
+
+add_action('pre_get_posts', 'atma_filter_stories_archive');
 
 /* ==========================================
    CUSTOM POST TYPE — OPINIE
