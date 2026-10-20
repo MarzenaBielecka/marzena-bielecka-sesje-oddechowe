@@ -28,6 +28,16 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 
+    if (is_front_page()) {
+        wp_enqueue_script(
+            'atma-testimonials',
+            get_stylesheet_directory_uri() . '/assets/js/testimonials.js',
+            [],
+            filemtime(get_stylesheet_directory() . '/assets/js/testimonials.js'),
+            true
+        );
+    }
+
     if (is_page('faq')) {
         wp_enqueue_script(
             'atma-faq',
@@ -110,12 +120,12 @@ function atma_customize_register($wp_customize) {
         ],
         'atma_hero_title' => [
             'label'   => 'Tytuł',
-            'default' => 'Oddech, który prowadzi do wewnętrznego spokoju',
+            'default' => 'Zapraszam Cię do świata oddechu',
             'type'    => 'textarea',
         ],
         'atma_hero_description' => [
             'label'   => 'Opis',
-            'default' => 'Indywidualne sesje oddechowe, medytacja i świadoma praca z energią. Odkryj moc głębokiego oddechu i odzyskaj równowagę.',
+            'default' => "Zapraszam Cię do świata oddechu połączonego – niezwykle subtelnego, a jednocześnie mającego ogromną siłę oddziaływania.\n\nOddech może dotykać tego, co dzieje się w naszej psychice, ciele i emocjach, otwierając przestrzeń na zmianę, uwolnienie i nowe doświadczenia.\n\nJeśli czujesz, że potrzebujesz zmiany, zapraszam.\n\nPodążymy tą drogą razem.",
             'type'    => 'textarea',
         ],
         'atma_hero_button_primary_text' => [
@@ -430,95 +440,19 @@ function atma_customize_register($wp_customize) {
             'default' => 'Każda historia jest inna, ale wszystkie łączy jedno — większy spokój, lekkość i głębszy kontakt ze sobą.',
             'type'    => 'textarea',
         ],
-        'atma_testimonial_1_text' => [
-            'label'   => 'Opinia 1 — Treść opinii',
-            'default' => 'To było naprawdę niesamowite doświadczenie.',
-            'type'    => 'textarea',
-        ],
-        'atma_testimonial_1_name' => [
-            'label'   => 'Opinia 1 — Imię i nazwisko',
-            'default' => 'Agata Nowak',
-            'type'    => 'text',
-        ],
-        'atma_testimonial_1_city' => [
-            'label'   => 'Opinia 1 — Miejscowość',
-            'default' => 'Jelenia Góra',
-            'type'    => 'text',
-        ],
-        'atma_testimonial_1_rating' => [
-            'label'   => 'Opinia 1 — Liczba gwiazdek',
-            'default' => 5,
-            'type'    => 'number',
-        ],
-        'atma_testimonial_2_text' => [
-            'label'   => 'Opinia 2 — Treść opinii',
-            'default' => 'Marzena to wspaniała terapeutka. Sesja była naprawdę mocna.',
-            'type'    => 'textarea',
-        ],
-        'atma_testimonial_2_name' => [
-            'label'   => 'Opinia 2 — Imię i nazwisko',
-            'default' => 'Stefan Koziński',
-            'type'    => 'text',
-        ],
-        'atma_testimonial_2_city' => [
-            'label'   => 'Opinia 2 — Miejscowość',
-            'default' => 'Golub-Dobrzyń',
-            'type'    => 'text',
-        ],
-        'atma_testimonial_2_rating' => [
-            'label'   => 'Opinia 2 — Liczba gwiazdek',
-            'default' => 5,
-            'type'    => 'number',
-        ],
-        'atma_testimonial_3_text' => [
-            'label'   => 'Opinia 3 — Treść opinii',
-            'default' => 'To była super sesja.',
-            'type'    => 'textarea',
-        ],
-        'atma_testimonial_3_name' => [
-            'label'   => 'Opinia 3 — Imię i nazwisko',
-            'default' => 'Anna Kowalska',
-            'type'    => 'text',
-        ],
-        'atma_testimonial_3_city' => [
-            'label'   => 'Opinia 3 — Miejscowość',
-            'default' => 'Warszawa',
-            'type'    => 'text',
-        ],
-        'atma_testimonial_3_rating' => [
-            'label'   => 'Opinia 3 — Liczba gwiazdek',
-            'default' => 5,
-            'type'    => 'number',
-        ],
     ];
 
     foreach ($testimonials_settings as $setting_id => $setting) {
-        $sanitize_callback = $setting['type'] === 'number'
-            ? function ($value) {
-                return min(5, max(1, absint($value)));
-            }
-            : ($setting['type'] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field');
-
         $wp_customize->add_setting($setting_id, [
             'default'           => $setting['default'],
-            'sanitize_callback' => $sanitize_callback,
+            'sanitize_callback' => $setting['type'] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field',
         ]);
 
-        $control_args = [
+        $wp_customize->add_control($setting_id, [
             'label'   => $setting['label'],
             'section' => 'atma_testimonials',
             'type'    => $setting['type'],
-        ];
-
-        if ($setting['type'] === 'number') {
-            $control_args['input_attrs'] = [
-                'min'  => 1,
-                'max'  => 5,
-                'step' => 1,
-            ];
-        }
-
-        $wp_customize->add_control($setting_id, $control_args);
+        ]);
     }
 
 }
@@ -535,16 +469,23 @@ function atma_register_testimonials() {
 
         'labels' => [
             'name'          => 'Opinie',
+            'menu_name'     => 'Opinie',
             'singular_name' => 'Opinia',
+            'all_items'     => 'Wszystkie opinie',
+            'add_new'       => 'Dodaj opinię',
             'add_new_item'  => 'Dodaj opinię',
             'edit_item'     => 'Edytuj opinię',
+            'view_item'     => 'Zobacz opinię',
+            'search_items'  => 'Szukaj opinii',
+            'not_found'     => 'Nie znaleziono opinii.',
         ],
 
-        'public'       => true,
-        'show_in_rest' => true,
-        'menu_icon'    => 'dashicons-format-quote',
-'supports' => ['title', 'editor'],
-        'has_archive'  => false,
+        'public'        => true,
+        'show_in_rest'  => true,
+        'show_in_menu'  => true,
+        'menu_icon'     => 'dashicons-format-quote',
+        'supports'      => ['title', 'editor', 'revisions'],
+        'has_archive'   => false,
 
     ]);
 
@@ -562,7 +503,9 @@ function atma_add_testimonial_meta() {
         'atma_testimonial',
         'Dane klienta',
         'atma_testimonial_callback',
-        'opinia'
+        'opinia',
+        'normal',
+        'high'
     );
 
 }
@@ -573,26 +516,32 @@ function atma_testimonial_callback($post) {
 
     $name   = get_post_meta($post->ID, 'client_name', true);
     $city   = get_post_meta($post->ID, 'client_city', true);
-    $rating = get_post_meta($post->ID, 'client_rating', true);
+    $rating = absint(get_post_meta($post->ID, 'client_rating', true));
+
+    if ($rating < 1 || $rating > 5) {
+        $rating = 5;
+    }
 
     ?>
 
+    <?php wp_nonce_field('atma_save_testimonial', 'atma_testimonial_nonce'); ?>
+
     <p>
-        <label>Imię i nazwisko</label><br>
-        <input type="text" name="client_name" value="<?php echo esc_attr($name); ?>" style="width:100%;">
+        <label for="client_name">Imię i nazwisko</label><br>
+        <input type="text" id="client_name" name="client_name" value="<?php echo esc_attr($name); ?>" class="widefat">
     </p>
 
     <p>
-        <label>Miasto</label><br>
-        <input type="text" name="client_city" value="<?php echo esc_attr($city); ?>" style="width:100%;">
+        <label for="client_city">Miejscowość</label><br>
+        <input type="text" id="client_city" name="client_city" value="<?php echo esc_attr($city); ?>" class="widefat">
     </p>
 
     <p>
-        <label>Ocena</label><br>
-        <select name="client_rating">
-            <?php for($i=5;$i>=1;$i--) : ?>
-                <option value="<?php echo $i; ?>" <?php selected($rating,$i); ?>>
-                    <?php echo $i; ?> ★
+        <label for="client_rating">Liczba gwiazdek</label><br>
+        <select id="client_rating" name="client_rating">
+            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                <option value="<?php echo esc_attr($i); ?>" <?php selected($rating, $i); ?>>
+                    <?php echo esc_html($i . ' ★'); ?>
                 </option>
             <?php endfor; ?>
         </select>
@@ -602,15 +551,73 @@ function atma_testimonial_callback($post) {
 }
 
 function atma_save_testimonial($post_id) {
+    $post = get_post($post_id);
 
-    if(isset($_POST['client_name']))
-        update_post_meta($post_id,'client_name',sanitize_text_field($_POST['client_name']));
+    if (
+        ! $post
+        || 'opinia' !== $post->post_type
+        || wp_is_post_revision($post_id)
+        || wp_is_post_autosave($post_id)
+        || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        || ! isset($_POST['atma_testimonial_nonce'])
+        || ! is_string($_POST['atma_testimonial_nonce'])
+        || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['atma_testimonial_nonce'])), 'atma_save_testimonial')
+        || ! current_user_can('edit_post', $post_id)
+    ) {
+        return;
+    }
 
-    if(isset($_POST['client_city']))
-        update_post_meta($post_id,'client_city',sanitize_text_field($_POST['client_city']));
+    $rating = null;
 
-    if(isset($_POST['client_rating']))
-        update_post_meta($post_id,'client_rating',intval($_POST['client_rating']));
+    if (isset($_POST['client_rating'])) {
+        $rating_value = wp_unslash($_POST['client_rating']);
+        $rating       = is_scalar($rating_value) ? filter_var($rating_value, FILTER_VALIDATE_INT) : false;
+
+        if (false === $rating || $rating < 1 || $rating > 5) {
+            set_transient(
+                'atma_testimonial_rating_error_' . get_current_user_id() . '_' . $post_id,
+                'Nie zapisano pól opinii: liczba gwiazdek musi być liczbą całkowitą od 1 do 5.',
+                MINUTE_IN_SECONDS
+            );
+            return;
+        }
+    }
+
+    foreach (['client_name', 'client_city'] as $field) {
+        if (isset($_POST[$field]) && is_scalar($_POST[$field])) {
+            update_post_meta($post_id, $field, sanitize_text_field(wp_unslash($_POST[$field])));
+        }
+    }
+
+    if (null !== $rating) {
+        update_post_meta($post_id, 'client_rating', $rating);
+    }
 }
 
-add_action('save_post_opinia','atma_save_testimonial');
+add_action('save_post_opinia', 'atma_save_testimonial');
+
+function atma_testimonial_save_error_notice() {
+    if (!isset($_GET['post']) || !is_scalar($_GET['post'])) {
+        return;
+    }
+
+    $post_id = absint(wp_unslash($_GET['post']));
+
+    if ('opinia' !== get_post_type($post_id) || !current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    $transient_key = 'atma_testimonial_rating_error_' . get_current_user_id() . '_' . $post_id;
+    $message       = get_transient($transient_key);
+
+    if ($message) {
+        delete_transient($transient_key);
+        ?>
+        <div class="notice notice-error is-dismissible">
+            <p><?php echo esc_html($message); ?></p>
+        </div>
+        <?php
+    }
+}
+
+add_action('admin_notices', 'atma_testimonial_save_error_notice');
